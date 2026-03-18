@@ -1,11 +1,12 @@
 import express, { type Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+dotenv.config();
 import { Server } from 'socket.io';
 import { createServer } from 'node:http';
 import { connectDB } from './src/config/db.ts';
 import { Socket } from 'node:dgram';
-import { errorHandler, notFound } from './src/middlware/errorMiddleware.ts';
+import { errorHandler, notFound } from './src/middleware/errorMiddleware.ts';
 
 connectDB();
 
