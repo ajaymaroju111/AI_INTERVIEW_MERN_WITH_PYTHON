@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema } from "mongoose";
-import type { IUser } from "../type/user.interface.js";
+import type { IUser } from "../types/user.interface.js";
 import bcrypt from "bcrypt";
 
 const userSchema: Schema<IUser> = new Schema(
@@ -39,6 +39,7 @@ const userSchema: Schema<IUser> = new Schema(
       type: String,
       default: "Mern Stack Developer",
     },
+    
   },
   {
     timestamps: true,

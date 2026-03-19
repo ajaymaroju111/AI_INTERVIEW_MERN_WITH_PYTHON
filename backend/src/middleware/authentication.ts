@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
-import type { IUser, JWTpayload } from '../type/user.interface.js';
+import type { IUser, JWTpayload } from '../types/user.interface.js';
 import { User } from '../model/user.model.js';
 
 

@@ -22,18 +22,25 @@ const fileFilter = (
   file: Express.Multer.File,
   cb: FileFilterCallback
 ) => {
-  const allowedTypes = /jpg|jpeg|png|webp/;
+  const allowedMimeTypes = [
+    "audio/mpeg",
+    "audio/wav",
+    "audio/ogg",
+    "audio/mp3",
+    "audio/x-wav",
+  ];
 
-  const isValidExt = allowedTypes.test(
-    path.extname(file.originalname).toLowerCase()
+  const allowedExtensions = [".mp3", ".wav", ".ogg"];
+
+  const isMimeValid = allowedMimeTypes.includes(file.mimetype);
+  const isExtValid = allowedExtensions.some(ext =>
+    file.originalname.toLowerCase().endsWith(ext)
   );
 
-  const isValidMime = allowedTypes.test(file.mimetype);
-
-  if (isValidExt && isValidMime) {
+  if (isMimeValid && isExtValid) {
     cb(null, true);
   } else {
-    cb(new Error("Only images are allowed"));
+    cb(new Error("Only valid audio files are allowed"));
   }
 };
 
@@ -41,6 +48,9 @@ export const upload = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 2 * 1024 * 1024, // 2MB limit
+    fileSize: 10 * 1024 * 1024,
   },
 });
+
+ export const uploadSingleAudio = upload.single('audio');
+

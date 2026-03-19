@@ -10,6 +10,7 @@ export interface IUser extends Document {
     preferredRole : string;
     createdAt: Date;
     updatedAt: Date;
+    comparePassword(password: string): Promise<boolean>;
 }
 
 export interface JWTpayload {
