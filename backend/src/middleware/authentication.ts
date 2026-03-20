@@ -1,7 +1,8 @@
 import type { NextFunction, Request, Response } from 'express';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
-import type { IUser, JWTpayload } from '../types/user.interface.js';
-import { User } from '../model/user.model.js';
+import type { IUser, JWTpayload } from '../types/user.interface.ts';
+import { User } from '../model/user.model.ts';
+import { authTokenSchema } from '../validators/auth/authtoken.schema.ts';
 
 
 export const authenticateToken = async (req: Request, res : Response, next: NextFunction) => {
@@ -21,10 +22,11 @@ export const authenticateToken = async (req: Request, res : Response, next: Next
 
         const decode = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as JWTpayload;
 
-        const user = await User.findById(decode.id).select("-password");
+        const parsedId = authTokenSchema.parse(decode);
+
+        const user = await User.findById(parsedId).select("-password");
 
         if(!user){
-            // sendErrorResponse.unauthorized("Unable to Login user");
             return res.status(401).json({ message: "Unauthorized" });
         }
 
