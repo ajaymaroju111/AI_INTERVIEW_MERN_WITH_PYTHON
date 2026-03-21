@@ -113,7 +113,7 @@ export const evaluateAnswer = async(
 
       } catch (error : any) {
         console.log(`transcription failed : ${error.message}`);
-        pushSocketUpdate(io, userId, sessionId, "failed", error.message);
+        // pushSocketUpdate(io, userId, sessionId, "failed", error.message);
         return;
       }finally {
         if(audioFilePath && fs.existsSync(audioFilePath)){
@@ -176,7 +176,8 @@ export const evaluateAnswer = async(
       }
     }
 
-  } catch (error) {
-    
+  } catch (error : any) {
+    console.log("error occured in evaluation", error.message);
+
   }
 }
