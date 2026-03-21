@@ -8,6 +8,7 @@ import { connectDB } from './src/config/db.ts';
 import { Socket } from 'node:dgram';
 import { errorHandler, notFound } from './src/middleware/errorMiddleware.ts';
 import authRoutes from './src/routes/auth.routes.ts';
+import sessionRoutes from './src/routes/session.routes.ts';
 
 connectDB();
 
@@ -16,6 +17,7 @@ const server = createServer(app);
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
+app.use('/api/session', sessionRoutes);
 
 const allowOrigin = [
     "http://localhost:5173",

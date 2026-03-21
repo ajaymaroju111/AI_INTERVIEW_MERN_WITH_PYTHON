@@ -12,7 +12,7 @@ const router = express.Router();
 router.post('/register', validate(registerSchema), registerController);
 router.post('/login', validate(loginSchema), loginController);
 // router.post('/google', validate(loginSchema), googleAuthcontroller);
-router.get('/profile/:userId', authenticateToken, validate(getUserProfileSchema), getUserProfileController);
+router.get('/profile', authenticateToken, validate(getUserProfileSchema), getUserProfileController);
 router.patch('/profile', authenticateToken, validate(updateUserProfileSchema), updateUserProfileController);
 
 export default router;
