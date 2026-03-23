@@ -35,4 +35,7 @@ except Exception as e:
     raise e
 
 class QuestionRequest(BaseModel):
-    question: str
+    role: str= "MERN Stack Developer"
+    level : str = "Junior"
+    count : int = 5
+    interviewType : str = "coding-mix"
